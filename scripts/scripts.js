@@ -114,6 +114,27 @@ function decorateButtons(main) {
 }
 
 /**
+ * Wraps bare images followed by a link paragraph into clickable images.
+ * @param {Element} main The main element
+ */
+function decorateLinkedImages(main) {
+  main.querySelectorAll('picture').forEach((picture) => {
+    const pictureParent = picture.parentElement;
+    if (pictureParent.tagName !== 'P') return;
+    if (pictureParent.children.length !== 1) return;
+    const next = pictureParent.nextElementSibling;
+    if (!next || next.tagName !== 'P') return;
+    const link = next.querySelector('a');
+    if (!link || next.textContent.trim() !== link.textContent.trim()) return;
+    const wrapper = link.cloneNode(false);
+    wrapper.textContent = '';
+    wrapper.append(picture);
+    pictureParent.replaceWith(wrapper);
+    next.remove();
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -124,6 +145,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateLinkedImages(main);
 }
 
 /**

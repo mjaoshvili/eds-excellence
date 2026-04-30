@@ -5,12 +5,16 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: var(--hero-min-height);
+  padding: var(--hero-padding-y) var(--hero-padding-x);
 }
 
 .hero h1 {
-  max-width: 1200px;
+  max-width: var(--layout-max-width);
   margin-left: auto;
   margin-right: auto;
   color: var(--background-color);
@@ -32,6 +36,6 @@
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    padding: var(--hero-padding-y) var(--hero-padding-x);
   }
 }
