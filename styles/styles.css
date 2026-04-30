@@ -12,12 +12,15 @@
 
 :root {
   /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --background-color: #0f1117;
+  --light-color: #1a1d2b;
+  --dark-color: #a0a8c0;
+  --text-color: #e8eaf0;
+  --link-color: #1473e6;
+  --link-hover-color: #4a9af5;
+  --accent-color: #1473e6;
+  --surface-color: #161922;
+  --border-color: #2a2e3d;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
@@ -137,7 +140,8 @@ pre {
 pre {
   padding: 16px;
   border-radius: 8px;
-  background-color: var(--light-color);
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
   overflow-x: auto;
   white-space: pre;
 }
@@ -199,18 +203,18 @@ button.button:disabled {
 
 a.button.primary,
 button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
-  color: var(--background-color);
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: #fff;
 }
 
 a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
+  color: #fff;
 }
 
 a.button.primary[aria-disabled="true"],
@@ -226,7 +230,7 @@ button.button.primary:disabled:focus-visible {
 
 a.button.secondary,
 button.button.secondary {
-  border-color: var(--text-color);
+  border-color: var(--border-color);
   background-color: transparent;
   color: var(--text-color);
 }
@@ -235,9 +239,9 @@ a.button.secondary:hover,
 a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--dark-color);
+  border-color: var(--accent-color);
   background-color: var(--light-color);
-  color: var(--dark-color);
+  color: var(--text-color);
 }
 
 a.button.secondary[aria-disabled="true"],
@@ -319,7 +323,9 @@ main > .section:first-of-type {
 /* section metadata */
 main .section.light,
 main .section.highlight {
-  background-color: var(--light-color);
+  background-color: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   margin: 0;
   padding: 40px 0;
 }
