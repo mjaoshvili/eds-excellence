@@ -443,7 +443,7 @@ header nav[aria-expanded='true'] .nav-sections {
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
     margin: 0;
-    padding: 0 var(--space-2) calc(var(--space-2) + var(--space-1)));
+    padding: 0 var(--space-2) calc(var(--space-2) + var(--space-1));
     border-top: var(--border-width-hairline) solid var(--header-nav-border);
     background-color: var(--background-color);
   }
