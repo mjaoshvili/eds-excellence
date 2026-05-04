@@ -139,9 +139,11 @@
   --size-touch-target: 44px;
   --icon-size-sm: 22px;
   --icon-size-md: 24px;
-  --nav-height: var(--size-touch-target);
-  --nav-brand-logo-max-width: 160px;
-  --nav-brand-logo-max-height: 40px;
+
+  /* Slightly taller than touch target so the brand mark can read clearly */
+  --nav-height: max(var(--size-touch-target), 52px);
+  --nav-brand-logo-max-width: 200px;
+  --nav-brand-logo-max-height: min(46px, calc(var(--nav-height) - var(--space-2)));
 
   /* ----- Header chrome ----- */
   --header-nav-bg: rgb(var(--color-white-rgb) / 96%);
