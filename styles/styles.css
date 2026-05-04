@@ -11,63 +11,238 @@
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* ----- Color primitives ----- */
+  --color-navy-900: #0d1a3f;
+  --color-navy-800: #152a58;
+  --color-navy-700: #1c3568;
+  --color-navy-rgb: 13 26 63;
+  --color-gray-600: #475569;
+  --color-gray-500: #64748b;
+  --color-gray-400: #94a3b8;
+  --color-gray-400-rgb: 148 163 184;
+  --color-gray-200: #e2e8f0;
+  --color-gray-100: #f1f5f9;
+  --color-white: #fff;
+  --color-white-rgb: 255 255 255;
+  --color-black: #000;
 
-  /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  /* ----- Semantic colors (site) ----- */
+  --color-surface-base: var(--color-white);
+  --color-surface-muted: var(--color-gray-100);
+  --color-text-primary: var(--color-navy-900);
+  --color-text-body: var(--color-black);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-subtle-on-light: var(--color-gray-600);
+  --color-text-on-dark: var(--color-white);
+  --color-border-default: var(--color-gray-200);
+  --color-link: var(--color-navy-900);
+  --color-link-hover: color-mix(in srgb, var(--color-navy-900) 85%, white);
 
-  /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  /* Legacy aliases (blocks & boilerplate) */
+  --background-color: var(--color-surface-base);
+  --light-color: var(--color-surface-muted);
+  --dark-color: var(--color-navy-700);
+  --text-color: var(--color-text-primary);
+  --link-color: var(--color-link);
+  --link-hover-color: var(--color-link-hover);
 
-  /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  /* ----- Typography ----- */
+  --font-family-sans: roboto, roboto-fallback, sans-serif;
+  --body-font-family: var(--font-family-sans);
+  --heading-font-family: var(--font-family-sans);
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-body: 1.6;
+  --line-height-heading: 1.25;
+  --line-height-snug: 1.35;
+  --line-height-tight: 1.2;
+  --line-height-extra-tight: 1.1;
+  --prose-flow-spacing: 0.8em;
+  --prose-flow-tight: 0.25em;
 
-  /* nav height */
-  --nav-height: 64px;
-}
+  /* Body scale — mobile first (<900px); desktop overrides in @media below */
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 15px;
 
-/* fallback fonts */
-@font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
+  /* Heading scale (h1–h6 map below) — mobile first */
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 28px;
+  --heading-font-size-l: 22px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
 
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
+  /* ----- Spacing (4px grid) ----- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-11: 44px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-18: 72px;
+
+  /* ----- Radius ----- */
+  --radius-xs: 2px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-full: 999px;
+  --radius-pill: 2.4em;
+  --radius-card: 20px;
+
+  /* ----- Shadows ----- */
+  --shadow-image-hover: 0 8px 28px rgb(var(--color-navy-rgb) / 12%);
+  --shadow-card-elevated-dark:
+    0 1px 0 rgb(var(--color-white-rgb) / 6%) inset,
+    0 18px 40px rgb(var(--color-navy-rgb) / 22%);
+  --shadow-card-elevated-light:
+    0 0 0 1px var(--color-border-default),
+    0 10px 28px rgb(var(--color-navy-rgb) / 6%);
+
+  /* ----- Motion ----- */
+  --duration-fast: 0.15s;
+  --duration-base: 0.2s;
+  --ease-standard: ease;
+
+  /* ----- Layout ----- */
+  --layout-max-width: 1200px;
+  --layout-wide: 1280px;
+  --layout-nav-inset: clamp(var(--space-4), 3vw, var(--space-8));
+  --section-spacing-y: var(--space-12);
+  --section-band-padding-y: var(--space-10);
+  --section-content-padding-x: var(--space-6);
+  --section-content-padding-x-lg: var(--space-8);
+
+  /* Vertical padding inside each section wrapper (sibling of default-content / *-wrapper) */
+  --section-wrapper-padding-block: var(--space-3);
+
+  /* When the section row already uses band padding (light / navy / highlight), keep inner calmer */
+  --section-wrapper-padding-block-compact: var(--space-2);
+
+  /* Space between stacked blocks inside one wrapper */
+  --block-margin-block: var(--space-3);
+  --main-outer-margin-y: var(--space-8);
+  --main-outer-margin-x: var(--space-4);
+  --scroll-margin-heading: var(--space-10);
+
+  /* ----- Sizing ----- */
+  --size-touch-target: 44px;
+  --icon-size-sm: 22px;
+  --icon-size-md: 24px;
+  --nav-height: var(--size-touch-target);
+  --nav-brand-logo-max-width: 160px;
+  --nav-brand-logo-max-height: 40px;
+
+  /* ----- Header chrome ----- */
+  --header-nav-bg: rgb(var(--color-white-rgb) / 96%);
+  --header-nav-border: rgb(var(--color-navy-rgb) / 10%);
+  --header-nav-shadow: 0 1px 0 rgb(var(--color-navy-rgb) / 6%), 0 8px 28px rgb(var(--color-navy-rgb) / 5%);
+  --header-nav-link-hover: rgb(var(--color-navy-rgb) / 6%);
+  --header-nav-link-active: rgb(var(--color-navy-rgb) / 11%);
+  --header-dropdown-bg: var(--color-surface-base);
+  --header-dropdown-border: rgb(var(--color-navy-rgb) / 10%);
+  --header-dropdown-shadow: 0 18px 50px rgb(var(--color-navy-rgb) / 12%), 0 0 1px rgb(var(--color-navy-rgb) / 8%);
+  --header-dropdown-item-hover: var(--color-surface-muted);
+
+  /* ----- Cards (consumed in blocks/cards/cards.css) ----- */
+  --card-surface-dark: var(--color-navy-900);
+  --card-text-on-dark: var(--color-text-on-dark);
+  --card-link-on-dark: var(--color-gray-400);
+  --card-link-hover-on-dark: var(--color-text-on-dark);
+  --card-padding: var(--space-6);
+  --card-padding-tight-top: calc(var(--space-6) - var(--space-1));
+  --card-grid-min: 280px;
+  --card-grid-gap: var(--space-6);
+  --card-block-margin-y: var(--space-6);
+  --card-icon-col-padding-bottom: var(--space-3);
+  --card-body-cta-padding-top: var(--space-5);
+  --card-eyebrow-letter-spacing: 0.14em;
+  --card-button-radius: var(--radius-lg);
+  --card-button-gap: 0.4rem;
+  --card-button-padding-y: calc(var(--space-2) + var(--space-1));
+  --card-button-padding-x: calc(var(--space-3) + var(--space-1));
+
+  /* CTA suffix after card buttons: mobile = simple arrow (avoids emoji font); desktop = northeast */
+  --glyph-external-link-mobile: '\2192';
+  --glyph-external-link-desktop: '\2197';
+
+  /* ----- Hero ----- */
+  --hero-min-height: 300px;
+  --hero-padding-y: var(--space-10);
+  --hero-padding-x: var(--section-content-padding-x);
+
+  /* ----- Footer ----- */
+  --footer-padding-block-start: var(--space-10);
+  --footer-padding-block-end: var(--space-6);
+  --footer-padding-inline: var(--section-content-padding-x);
+
+  /* ----- Borders & focus (shared chrome) ----- */
+  --border-width-hairline: 1px;
+  --border-width-emphasis: 2px;
+  --focus-ring-width: var(--border-width-emphasis);
+  --focus-ring-offset: var(--space-1);
+  --effect-backdrop-blur-header: 14px;
+
+  /* Nav hamburger icon (pixel-aligned to icon font) */
+  --nav-hamburger-bar-width: var(--space-5);
+  --nav-hamburger-bar-height: var(--radius-xs);
+  --nav-hamburger-bar-gap: calc(var(--space-1) + var(--space-1) / 2);
+  --nav-hamburger-open-frame-height: calc(var(--space-5) + var(--radius-xs));
+  --nav-hamburger-open-bar-width: var(--space-6);
+  --nav-hamburger-open-offset-x: calc(var(--radius-xs) / 2);
+  --nav-hamburger-open-offset-y: calc(var(--space-2) - var(--space-1) / 2);
+  --nav-hamburger-open-transform-origin-x: var(--radius-xs);
+  --nav-hamburger-open-transform-origin-y: calc(var(--radius-xs) / 2);
+  --nav-hamburger-open-after-bottom: calc(var(--space-2) - var(--space-1) / 2);
+
+  /* Nav chevron (desktop .nav-drop) */
+  --nav-chevron-size: calc(var(--space-1) + var(--space-1) / 2);
+  --nav-chevron-inset-end: var(--radius-xs);
+  --nav-chevron-border-width: var(--border-width-emphasis);
+  --nav-chevron-margin-shift: calc(-1.25 * var(--space-1));
+  --nav-chevron-margin-shift-expanded: calc(var(--radius-xs) / -2);
+
+  /* Brand link hit padding (optical) */
+  --nav-brand-link-padding-y: calc(var(--space-1) + var(--space-1) / 2);
+  --nav-brand-link-padding-x: var(--space-1);
+
+  /* ----- Nav (dropdown sizing; header block) ----- */
+  --nav-dropdown-min-width: 260px;
+  --nav-dropdown-max-width: min(340px, calc(100vw - var(--space-12)));
+  --nav-dropdown-max-height: min(70vh, 420px);
 }
 
 @media (width >= 900px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
+    --body-font-size-m: 19px;
+    --body-font-size-s: 17px;
+    --body-font-size-xs: 15px;
+    --heading-font-size-xxl: 52px;
     --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
+    --heading-font-size-l: 24px;
     --heading-font-size-m: 22px;
     --heading-font-size-s: 20px;
     --heading-font-size-xs: 18px;
+    --hero-padding-x: var(--section-content-padding-x-lg);
+    --footer-padding-inline: var(--section-content-padding-x-lg);
   }
+}
+
+/* fallback font (matches self-hosted Roboto in fonts.css) */
+@font-face {
+  font-family: roboto-fallback;
+  size-adjust: 99.529%;
+  src: local('Arial');
 }
 
 body {
@@ -77,7 +252,7 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: var(--line-height-body);
 }
 
 body.appear {
@@ -104,12 +279,12 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: var(--prose-flow-spacing);
+  margin-bottom: var(--prose-flow-tight);
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
-  scroll-margin: 40px;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  scroll-margin: var(--scroll-margin-heading);
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -125,8 +300,12 @@ ol,
 ul,
 pre,
 blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: var(--prose-flow-spacing);
+  margin-bottom: var(--prose-flow-tight);
+}
+
+p {
+  color: var(--color-text-body);
 }
 
 code,
@@ -135,15 +314,15 @@ pre {
 }
 
 pre {
-  padding: 16px;
-  border-radius: 8px;
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
 }
 
 main > div {
-  margin: 40px 16px;
+  margin: var(--main-outer-margin-y) var(--main-outer-margin-x);
 }
 
 input,
@@ -167,7 +346,7 @@ a:hover {
 
 /* buttons */
 p.button-wrapper {
-  margin: 12px 0;
+  margin: var(--space-3) 0;
 }
 
 a.button:any-link,
@@ -179,11 +358,11 @@ button.button {
   max-width: 100%;
   margin: 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
+  border-radius: var(--radius-pill);
   padding: 0.5em 1.2em;
   font: inherit;
-  font-weight: 500;
-  line-height: 1.25;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-heading);
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
@@ -208,9 +387,9 @@ a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
+  color: var(--background-color);
 }
 
 a.button.primary[aria-disabled="true"],
@@ -284,10 +463,17 @@ main img {
   height: auto;
 }
 
+main a > picture > img {
+  display: block;
+  margin: var(--space-10) 0;
+  max-width: 70%;
+  transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+
 .icon {
   display: inline-block;
-  height: 24px;
-  width: 24px;
+  height: var(--icon-size-md);
+  width: var(--icon-size-md);
 }
 
 .icon img {
@@ -295,15 +481,34 @@ main img {
   width: 100%;
 }
 
+main a:any-link:hover > picture > img,
+main a:any-link:focus-visible > picture > img {
+  box-shadow: var(--shadow-image-hover);
+}
+
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: var(--section-spacing-y) 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--layout-max-width);
   margin: auto;
-  padding: 0 24px;
+  padding: var(--section-wrapper-padding-block) var(--section-content-padding-x);
+}
+
+main .section.light > div,
+main .section.highlight > div,
+main .section.navy > div {
+  padding-block: var(--section-wrapper-padding-block-compact);
+}
+
+main > .section > div > :first-child {
+  margin-block-start: 0;
+}
+
+main > .section > div > :last-child {
+  margin-block-end: 0;
 }
 
 main > .section:first-of-type {
@@ -312,14 +517,153 @@ main > .section:first-of-type {
 
 @media (width >= 900px) {
   main > .section > div {
-    padding: 0 32px;
+    padding-inline: var(--section-content-padding-x-lg);
   }
 }
 
-/* section metadata */
+/* Blocks — vertical rhythm (cards use a wider band; hero is full-bleed) */
+main .section .block:not(.cards) {
+  margin-block: var(--block-margin-block);
+}
+
+main .section .cards {
+  margin-block: var(--card-block-margin-y);
+}
+
+main .section.hero-container .block {
+  margin-block: 0;
+}
+
+/* section metadata — set Style in section metadata (e.g. `navy`, `light`, `highlight`, `center`) */
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--section-band-padding-y) 0;
+}
+
+main .section.navy {
+  background-color: var(--color-navy-900);
+  color: var(--color-text-on-dark);
+  margin: 0;
+  padding: var(--section-band-padding-y) 0;
+}
+
+main .section.navy p {
+  color: var(--color-text-on-dark);
+}
+
+main .section.navy :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-text-on-dark);
+}
+
+main .section.navy a:any-link:not(.button) {
+  color: var(--color-gray-400);
+}
+
+main .section.navy a:any-link:not(.button):hover,
+main .section.navy a:any-link:not(.button):focus-visible {
+  color: var(--color-text-on-dark);
+}
+
+main .section.navy a.button.primary:any-link,
+main .section.navy button.button.primary {
+  border-color: var(--color-surface-base);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+main .section.navy a.button.primary:any-link:hover,
+main .section.navy a.button.primary:any-link:focus-visible,
+main .section.navy button.button.primary:hover,
+main .section.navy button.button.primary:focus-visible {
+  border-color: var(--color-border-default);
+  background-color: var(--color-border-default);
+  color: var(--color-text-primary);
+}
+
+main .section.navy a.button.primary[aria-disabled='true'],
+main .section.navy a.button.primary[aria-disabled='true']:hover,
+main .section.navy a.button.primary[aria-disabled='true']:focus-visible,
+main .section.navy button.button.primary:disabled,
+main .section.navy button.button.primary:disabled:hover,
+main .section.navy button.button.primary:disabled:focus-visible {
+  border-color: var(--color-gray-500);
+  background-color: var(--color-gray-500);
+  color: var(--color-surface-muted);
+}
+
+main .section.navy a.button.secondary:any-link,
+main .section.navy button.button.secondary {
+  border-color: rgb(var(--color-white-rgb) / 55%);
+  background-color: transparent;
+  color: var(--color-text-on-dark);
+}
+
+main .section.navy a.button.secondary:any-link:hover,
+main .section.navy a.button.secondary:any-link:focus-visible,
+main .section.navy button.button.secondary:hover,
+main .section.navy button.button.secondary:focus-visible {
+  border-color: var(--color-surface-base);
+  background-color: rgb(var(--color-white-rgb) / 12%);
+  color: var(--color-text-on-dark);
+}
+
+main .section.navy a.button.secondary[aria-disabled='true'],
+main .section.navy a.button.secondary[aria-disabled='true']:hover,
+main .section.navy a.button.secondary[aria-disabled='true']:focus-visible,
+main .section.navy button.button.secondary:disabled,
+main .section.navy button.button.secondary:disabled:hover,
+main .section.navy button.button.secondary:disabled:focus-visible {
+  border-color: var(--color-gray-500);
+  background-color: rgb(var(--color-white-rgb) / 8%);
+  color: var(--color-gray-400);
+}
+
+main .section.navy a.button.accent:any-link,
+main .section.navy button.button.accent {
+  border-color: var(--color-border-default);
+  background-color: var(--color-border-default);
+  color: var(--color-text-primary);
+}
+
+main .section.navy a.button.accent:any-link:hover,
+main .section.navy a.button.accent:any-link:focus-visible,
+main .section.navy button.button.accent:hover,
+main .section.navy button.button.accent:focus-visible {
+  border-color: var(--color-surface-base);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+main .section.navy a.button.accent[aria-disabled='true'],
+main .section.navy a.button.accent[aria-disabled='true']:hover,
+main .section.navy a.button.accent[aria-disabled='true']:focus-visible,
+main .section.navy button.button.accent:disabled,
+main .section.navy button.button.accent:disabled:hover,
+main .section.navy button.button.accent:disabled:focus-visible {
+  border-color: var(--color-gray-500);
+  background-color: var(--color-gray-500);
+  color: var(--color-surface-muted);
+}
+
+/* centered default content — Style: center */
+main .section.center .default-content-wrapper {
+  text-align: center;
+}
+
+main .section.center .default-content-wrapper :is(ul, ol) {
+  list-style-position: inside;
+  padding-inline-start: 0;
+}
+
+main .section.center .default-content-wrapper img,
+main .section.center .default-content-wrapper picture {
+  margin-inline: auto;
+}
+
+main .section.center .default-content-wrapper picture {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
 }

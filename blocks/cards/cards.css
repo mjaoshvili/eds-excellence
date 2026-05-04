@@ -1,27 +1,351 @@
+/* Cards — tokens from styles.css :root (--card-*, --shadow-*, --space-*, etc.) */
+
+.cards {
+  --cards-surface: var(--card-surface-dark);
+  --cards-text: var(--card-text-on-dark);
+  --cards-link: var(--card-link-on-dark);
+  --cards-link-hover: var(--card-link-hover-on-dark);
+  --cards-radius: var(--radius-card);
+  --cards-pad: var(--card-padding);
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-grid-min), 1fr));
+  gap: var(--card-grid-gap);
+  align-items: stretch;
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--cards-surface);
+  color: var(--cards-text);
+  border-radius: var(--cards-radius);
+  box-shadow: var(--shadow-card-elevated-dark);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: var(--cards-pad);
+  padding-top: var(--card-padding-tight-top);
+}
+
+.cards .cards-card-body > :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--cards-text);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.cards .cards-card-body > :is(h1, h2, h3, h4, h5, h6) ~ :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: var(--space-3);
+}
+
+.cards .cards-card-body > :is(h1, h2) {
+  font-size: var(--heading-font-size-m);
+}
+
+.cards .cards-card-body > :is(h3, h4) {
+  font-size: var(--heading-font-size-s);
+}
+
+.cards .cards-card-body > :is(h5, h6) {
+  font-size: var(--heading-font-size-xs);
+}
+
+.cards .cards-card-body > p:not(.button-wrapper) {
+  color: var(--cards-text);
+  font-size: var(--body-font-size-s);
+  line-height: 1.55;
+}
+
+.cards .cards-card-body > :is(h1, h2, h3, h4, h5, h6) + p:not(.button-wrapper) {
+  margin-top: auto;
+}
+
+.cards .cards-card-body > p:not(.button-wrapper):first-child {
+  margin-top: 0;
+}
+
+.cards .cards-card-body > p:not(.button-wrapper) ~ p:not(.button-wrapper) {
+  margin-top: 0.65em;
+}
+
+.cards .cards-card-body > p:first-child:not(.button-wrapper):is(
+    :has(+ h1),
+    :has(+ h2),
+    :has(+ h3),
+    :has(+ h4),
+    :has(+ h5),
+    :has(+ h6)
+  ) {
+  margin-top: 0;
+  margin-bottom: calc(var(--space-2) - var(--space-1));
+  font-size: var(--body-font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--card-eyebrow-letter-spacing);
+  line-height: var(--line-height-snug);
+  text-transform: uppercase;
+  color: var(--cards-text);
+}
+
+.cards .cards-card-body a:any-link:not(.button) {
+  color: var(--cards-link);
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-gray-400-rgb) / 45%);
+  text-underline-offset: 0.15em;
+}
+
+.cards .cards-card-body a:any-link:not(.button):hover,
+.cards .cards-card-body a:any-link:not(.button):focus-visible {
+  color: var(--cards-link-hover);
+}
+
+.cards .cards-card-body > p.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-self: stretch;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: var(--card-body-cta-padding-top);
+}
+
+.cards .cards-card-body a.button:any-link,
+.cards .cards-card-body button.button {
+  box-sizing: border-box;
+  width: auto;
+  min-width: var(--size-touch-target);
+  min-height: var(--size-touch-target);
+  padding: var(--card-button-padding-y) var(--card-button-padding-x);
+  gap: var(--card-button-gap);
+  border-width: 1px;
+  border-color: var(--color-surface-base);
+  border-radius: var(--card-button-radius);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+  font-size: var(--body-font-size-xs);
+  white-space: normal;
+  text-align: center;
+}
+
+.cards .cards-card-body a.button:any-link:hover,
+.cards .cards-card-body a.button:any-link:focus-visible,
+.cards .cards-card-body button.button:hover,
+.cards .cards-card-body button.button:focus-visible {
+  border-color: var(--color-border-default);
+  background-color: var(--color-border-default);
+  color: var(--color-text-primary);
+}
+
+.cards .cards-card-body a.button:any-link::after,
+.cards .cards-card-body button.button::after {
+  content: var(--glyph-external-link-mobile);
+  flex-shrink: 0;
+  font-size: 1.05em;
+  line-height: 1;
+  margin-left: 0.15em;
+  text-decoration: none;
+  font-variant-emoji: text;
+}
+
+@media (width >= 900px) {
+  .cards .cards-card-body a.button:any-link::after,
+  .cards .cards-card-body button.button::after {
+    content: var(--glyph-external-link-desktop);
+  }
+}
+
+.cards .cards-card-body a.button.primary:any-link,
+.cards .cards-card-body button.button.primary {
+  border-color: var(--color-surface-base);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+.cards .cards-card-body a.button.primary:any-link:hover,
+.cards .cards-card-body a.button.primary:any-link:focus-visible,
+.cards .cards-card-body button.button.primary:hover,
+.cards .cards-card-body button.button.primary:focus-visible {
+  border-color: var(--color-border-default);
+  background-color: var(--color-border-default);
+  color: var(--color-text-primary);
+}
+
+.cards .cards-card-body a.button.secondary:any-link,
+.cards .cards-card-body button.button.secondary {
+  border-color: var(--color-surface-base);
+  background-color: transparent;
+  color: var(--color-text-on-dark);
+}
+
+.cards .cards-card-body a.button.secondary:any-link:hover,
+.cards .cards-card-body a.button.secondary:any-link:focus-visible,
+.cards .cards-card-body button.button.secondary:hover,
+.cards .cards-card-body button.button.secondary:focus-visible {
+  border-color: var(--color-border-default);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+.cards .cards-card-body a.button.accent:any-link,
+.cards .cards-card-body button.button.accent {
+  border-color: var(--color-surface-base);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+.cards .cards-card-body a.button.accent:any-link:hover,
+.cards .cards-card-body a.button.accent:any-link:focus-visible,
+.cards .cards-card-body button.button.accent:hover,
+.cards .cards-card-body button.button.accent:focus-visible {
+  border-color: var(--color-border-default);
+  background-color: var(--color-border-default);
+  color: var(--color-text-primary);
 }
 
 .cards .cards-card-image {
+  flex-shrink: 0;
   line-height: 0;
 }
 
-.cards > ul > li img {
+.cards .cards-card-image img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+.cards .cards-card-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--cards-pad) var(--cards-pad) var(--card-icon-col-padding-bottom);
+  line-height: 0;
+  background-color: transparent;
+}
+
+.cards .cards-card-icon + .cards-card-body {
+  padding-top: 0;
+}
+
+.cards .cards-card-icon .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+}
+
+.cards .cards-card-icon .icon img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* Light variant — author: Cards (light) */
+.cards.light {
+  --cards-surface: var(--color-surface-base);
+  --cards-text: var(--color-text-primary);
+  --cards-link: var(--link-color);
+  --cards-link-hover: var(--link-hover-color);
+}
+
+.cards.light > ul > li {
+  box-shadow: var(--shadow-card-elevated-light);
+}
+
+.cards.light .cards-card-body > p:first-child:not(.button-wrapper):is(
+    :has(+ h1),
+    :has(+ h2),
+    :has(+ h3),
+    :has(+ h4),
+    :has(+ h5),
+    :has(+ h6)
+  ) {
+  color: var(--color-text-subtle-on-light);
+}
+
+.cards.light .cards-card-body a:any-link:not(.button) {
+  text-decoration-color: rgb(var(--color-navy-rgb) / 35%);
+}
+
+.cards.light .cards-card-icon .icon img {
+  filter: none;
+}
+
+.cards.light .cards-card-body a.button:any-link,
+.cards.light .cards-card-body button.button {
+  border-color: rgb(var(--color-navy-rgb) / 14%);
+  background-color: rgb(var(--color-navy-rgb) / 5%);
+  color: var(--cards-text);
+}
+
+.cards.light .cards-card-body a.button:any-link:hover,
+.cards.light .cards-card-body a.button:any-link:focus-visible,
+.cards.light .cards-card-body button.button:hover,
+.cards.light .cards-card-body button.button:focus-visible {
+  border-color: rgb(var(--color-navy-rgb) / 22%);
+  background-color: rgb(var(--color-navy-rgb) / 9%);
+  color: var(--cards-text);
+}
+
+.cards.light .cards-card-body a.button.primary:any-link,
+.cards.light .cards-card-body button.button.primary {
+  border-color: var(--color-text-primary);
+  background-color: var(--color-text-primary);
+  color: var(--color-surface-base);
+}
+
+.cards.light .cards-card-body a.button.primary:any-link:hover,
+.cards.light .cards-card-body a.button.primary:any-link:focus-visible,
+.cards.light .cards-card-body button.button.primary:hover,
+.cards.light .cards-card-body button.button.primary:focus-visible {
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
+  color: var(--color-surface-base);
+}
+
+.cards.light .cards-card-body a.button.secondary:any-link,
+.cards.light .cards-card-body button.button.secondary {
+  border-color: rgb(var(--color-navy-rgb) / 35%);
+  background-color: transparent;
+  color: var(--cards-text);
+}
+
+.cards.light .cards-card-body a.button.secondary:any-link:hover,
+.cards.light .cards-card-body a.button.secondary:any-link:focus-visible,
+.cards.light .cards-card-body button.button.secondary:hover,
+.cards.light .cards-card-body button.button.secondary:focus-visible {
+  border-color: var(--color-text-primary);
+  background-color: var(--color-surface-muted);
+  color: var(--cards-text);
+}
+
+.cards.light .cards-card-body a.button.accent:any-link,
+.cards.light .cards-card-body button.button.accent {
+  border-color: var(--link-color);
+  background-color: var(--link-color);
+  color: var(--color-surface-base);
+}
+
+.cards.light .cards-card-body a.button.accent:any-link:hover,
+.cards.light .cards-card-body a.button.accent:any-link:focus-visible,
+.cards.light .cards-card-body button.button.accent:hover,
+.cards.light .cards-card-body button.button.accent:focus-visible {
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
+  color: var(--color-surface-base);
 }
