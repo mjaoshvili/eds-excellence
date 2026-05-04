@@ -466,7 +466,6 @@ main img {
 main a > picture > img {
   display: block;
   margin: var(--space-10) 0;
-  max-width: 70%;
   transition: box-shadow var(--duration-base) var(--ease-standard);
 }
 
