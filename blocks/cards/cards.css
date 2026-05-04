@@ -7,8 +7,6 @@
   --cards-link-hover: var(--card-link-hover-on-dark);
   --cards-radius: var(--radius-card);
   --cards-pad: var(--card-padding);
-
-  margin: var(--card-block-margin-y) 0;
 }
 
 .cards > ul {
@@ -150,12 +148,20 @@
 
 .cards .cards-card-body a.button:any-link::after,
 .cards .cards-card-body button.button::after {
-  content: '↗';
+  content: var(--glyph-external-link-mobile);
   flex-shrink: 0;
   font-size: 1.05em;
   line-height: 1;
   margin-left: 0.15em;
   text-decoration: none;
+  font-variant-emoji: text;
+}
+
+@media (width >= 900px) {
+  .cards .cards-card-body a.button:any-link::after,
+  .cards .cards-card-body button.button::after {
+    content: var(--glyph-external-link-desktop);
+  }
 }
 
 .cards .cards-card-body a.button.primary:any-link,

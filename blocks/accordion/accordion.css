@@ -1,0 +1,261 @@
+/* Accordion — tokens from styles.css :root; one connected stack (not separate cards) */
+
+.accordion {
+  font-family: var(--body-font-family);
+  color: var(--text-color);
+  border: var(--border-width-hairline) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgb(var(--color-navy-rgb) / 5%);
+}
+
+/* Rows stack flush; only horizontal dividers between items */
+.accordion details {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  border-bottom: var(--border-width-hairline) solid rgb(var(--color-navy-rgb) / 10%);
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.accordion details:last-of-type {
+  border-bottom: none;
+}
+
+.accordion details p {
+  margin-bottom: var(--prose-flow-tight);
+}
+
+.accordion details p:last-child {
+  margin-bottom: 0;
+}
+
+.accordion details summary {
+  position: relative;
+  box-sizing: border-box;
+  min-height: var(--size-touch-target);
+  padding: var(--space-2) var(--space-3);
+  padding-inline-end: calc(var(--space-4) + var(--nav-chevron-size) + var(--space-2));
+  cursor: pointer;
+  list-style: none;
+  overflow: auto;
+  font-size: var(--body-font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  color: var(--text-color);
+}
+
+.accordion details summary:hover {
+  background-color: var(--header-nav-link-hover);
+}
+
+.accordion details[open] summary {
+  background-color: var(--header-nav-link-active);
+}
+
+.accordion details summary:focus-visible {
+  background-color: var(--header-nav-link-hover);
+  outline: var(--focus-ring-width) solid var(--link-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.accordion details summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion details summary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: var(--space-4);
+  width: var(--nav-chevron-size);
+  height: var(--nav-chevron-size);
+  border: var(--nav-chevron-border-width) solid currentcolor;
+  border-width: var(--nav-chevron-border-width) var(--nav-chevron-border-width) 0 0;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.accordion details[open] summary::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.accordion details .accordion-item-body {
+  padding: 0 var(--space-3) var(--space-3);
+  font-size: var(--body-font-size-xs);
+  line-height: var(--line-height-body);
+  color: var(--color-text-body);
+}
+
+.accordion details[open] > .accordion-item-body {
+  border-top: var(--border-width-hairline) solid var(--color-border-default);
+  padding-top: var(--space-3);
+  background-color: var(--color-surface-base);
+}
+
+/* Alternate stripes — default (light) page: odd = navy, even = white */
+/* stylelint-disable no-descending-specificity */
+.accordion details:nth-child(odd) {
+  background-color: var(--color-navy-900);
+  color: var(--color-text-on-dark);
+  border-bottom-color: rgb(var(--color-white-rgb) / 12%);
+}
+
+.accordion details:nth-child(odd) summary {
+  color: var(--color-text-on-dark);
+}
+
+.accordion details:nth-child(odd) summary:hover {
+  background-color: rgb(var(--color-white-rgb) / 10%);
+}
+
+.accordion details:nth-child(odd)[open] summary {
+  background-color: rgb(var(--color-white-rgb) / 14%);
+}
+
+.accordion details:nth-child(odd) summary:focus-visible {
+  outline-color: var(--color-surface-base);
+}
+
+.accordion details:nth-child(odd) .accordion-item-body {
+  color: var(--color-text-on-dark);
+}
+
+.accordion details:nth-child(odd)[open] .accordion-item-body {
+  border-top-color: rgb(var(--color-white-rgb) / 18%);
+  background-color: rgb(var(--color-white-rgb) / 8%);
+  color: var(--color-text-on-dark);
+}
+
+.accordion details:nth-child(odd) .accordion-item-body a:any-link {
+  color: var(--color-gray-400);
+}
+
+.accordion details:nth-child(odd) .accordion-item-body a:any-link:hover,
+.accordion details:nth-child(odd) .accordion-item-body a:any-link:focus-visible {
+  color: var(--color-text-on-dark);
+}
+
+/* Global `p { color: … }` beats inherited body color — force on-dark prose in navy rows */
+.accordion details:nth-child(odd) .accordion-item-body :is(p, li, dd, dt, blockquote) {
+  color: var(--color-text-on-dark);
+}
+
+.accordion details:nth-child(odd) .accordion-item-body :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-text-on-dark);
+}
+
+.accordion details:nth-child(odd) summary::after {
+  border-color: currentcolor;
+}
+
+.accordion details:nth-child(even) {
+  background-color: var(--color-surface-base);
+  border-bottom-color: rgb(var(--color-navy-rgb) / 12%);
+}
+
+.accordion details:nth-child(even) summary {
+  color: var(--text-color);
+}
+
+.accordion details:nth-child(even) summary:hover {
+  background-color: var(--header-nav-link-hover);
+}
+
+.accordion details:nth-child(even)[open] summary {
+  background-color: var(--header-nav-link-active);
+}
+
+.accordion details:nth-child(even) summary:focus-visible {
+  outline-color: var(--link-color);
+}
+
+.accordion details:nth-child(even) .accordion-item-body {
+  color: var(--color-text-body);
+}
+
+.accordion details:nth-child(even)[open] .accordion-item-body {
+  border-top-color: var(--color-border-default);
+  background-color: var(--color-surface-muted);
+}
+
+/* stylelint-enable no-descending-specificity */
+
+/* Navy section — even = white card first (stylelint), odd = navy row; mutually exclusive nth-child */
+/* stylelint-disable no-descending-specificity */
+main .section.navy .accordion {
+  border-color: rgb(var(--color-white-rgb) / 22%);
+  box-shadow: none;
+}
+
+main .section.navy .accordion details {
+  border-bottom-color: rgb(var(--color-white-rgb) / 14%);
+}
+
+main .section.navy .accordion details:nth-child(even) {
+  background-color: var(--color-surface-base);
+  border-bottom-color: rgb(var(--color-navy-rgb) / 12%);
+}
+
+main .section.navy .accordion details:nth-child(even) summary {
+  color: var(--text-color);
+}
+
+main .section.navy .accordion details:nth-child(even) summary:hover {
+  background-color: var(--header-nav-link-hover);
+}
+
+main .section.navy .accordion details:nth-child(even)[open] summary {
+  background-color: var(--header-nav-link-active);
+}
+
+main .section.navy .accordion details:nth-child(even) summary:focus-visible {
+  outline-color: var(--link-color);
+}
+
+main .section.navy .accordion details:nth-child(even) .accordion-item-body {
+  color: var(--color-text-body);
+}
+
+main .section.navy .accordion details:nth-child(even)[open] .accordion-item-body {
+  border-top-color: var(--color-border-default);
+  background-color: var(--color-surface-muted);
+}
+
+main .section.navy .accordion details:nth-child(odd) {
+  background-color: var(--color-navy-900);
+  border-bottom-color: rgb(var(--color-white-rgb) / 12%);
+}
+
+main .section.navy .accordion details:nth-child(odd) summary {
+  color: var(--color-text-on-dark);
+}
+
+main .section.navy .accordion details:nth-child(odd) summary:hover {
+  background-color: rgb(var(--color-white-rgb) / 10%);
+}
+
+main .section.navy .accordion details:nth-child(odd)[open] summary {
+  background-color: rgb(var(--color-white-rgb) / 14%);
+}
+
+main .section.navy .accordion details:nth-child(odd) summary:focus-visible {
+  background-color: rgb(var(--color-white-rgb) / 10%);
+  outline-color: var(--color-surface-base);
+}
+
+main .section.navy .accordion details:nth-child(odd) .accordion-item-body {
+  color: var(--color-text-on-dark);
+}
+
+main .section.navy .accordion details:nth-child(odd)[open] .accordion-item-body {
+  border-top-color: rgb(var(--color-white-rgb) / 18%);
+  background-color: rgb(var(--color-white-rgb) / 8%);
+  color: var(--color-text-on-dark);
+}
+
+main .section.navy .accordion details:nth-child(odd) summary::after {
+  border-color: currentcolor;
+}
+
+/* stylelint-enable no-descending-specificity */

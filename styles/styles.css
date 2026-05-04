@@ -62,18 +62,18 @@
   --prose-flow-spacing: 0.8em;
   --prose-flow-tight: 0.25em;
 
-  /* Body scale */
-  --body-font-size-m: 23px;
-  --body-font-size-s: 20px;
-  --body-font-size-xs: 18px;
+  /* Body scale — mobile first (<900px); desktop overrides in @media below */
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 15px;
 
-  /* Heading scale (h1–h6 map below) */
-  --heading-font-size-xxl: 64px;
-  --heading-font-size-xl: 48px;
-  --heading-font-size-l: 30px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  /* Heading scale (h1–h6 map below) — mobile first */
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 28px;
+  --heading-font-size-l: 22px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
 
   /* ----- Spacing (4px grid) ----- */
   --space-1: 4px;
@@ -118,11 +118,20 @@
   --layout-max-width: 1200px;
   --layout-wide: 1280px;
   --layout-nav-inset: clamp(var(--space-4), 3vw, var(--space-8));
-  --section-spacing-y: var(--space-18);
+  --section-spacing-y: var(--space-12);
   --section-band-padding-y: var(--space-10);
   --section-content-padding-x: var(--space-6);
   --section-content-padding-x-lg: var(--space-8);
-  --main-outer-margin-y: var(--space-10);
+
+  /* Vertical padding inside each section wrapper (sibling of default-content / *-wrapper) */
+  --section-wrapper-padding-block: var(--space-3);
+
+  /* When the section row already uses band padding (light / navy / highlight), keep inner calmer */
+  --section-wrapper-padding-block-compact: var(--space-2);
+
+  /* Space between stacked blocks inside one wrapper */
+  --block-margin-block: var(--space-3);
+  --main-outer-margin-y: var(--space-8);
   --main-outer-margin-x: var(--space-4);
   --scroll-margin-heading: var(--space-10);
 
@@ -154,7 +163,7 @@
   --card-padding-tight-top: calc(var(--space-6) - var(--space-1));
   --card-grid-min: 280px;
   --card-grid-gap: var(--space-6);
-  --card-block-margin-y: var(--space-10);
+  --card-block-margin-y: var(--space-6);
   --card-icon-col-padding-bottom: var(--space-3);
   --card-body-cta-padding-top: var(--space-5);
   --card-eyebrow-letter-spacing: 0.14em;
@@ -162,6 +171,10 @@
   --card-button-gap: 0.4rem;
   --card-button-padding-y: calc(var(--space-2) + var(--space-1));
   --card-button-padding-x: calc(var(--space-3) + var(--space-1));
+
+  /* CTA suffix after card buttons: mobile = simple arrow (avoids emoji font); desktop = northeast */
+  --glyph-external-link-mobile: '\2192';
+  --glyph-external-link-desktop: '\2197';
 
   /* ----- Hero ----- */
   --hero-min-height: 300px;
@@ -215,7 +228,7 @@
     --body-font-size-s: 17px;
     --body-font-size-xs: 15px;
     --heading-font-size-xxl: 52px;
-    --heading-font-size-xl: 40px;
+    --heading-font-size-xl: 36px;
     --heading-font-size-l: 24px;
     --heading-font-size-m: 22px;
     --heading-font-size-s: 20px;
@@ -481,7 +494,21 @@ main > .section {
 main > .section > div {
   max-width: var(--layout-max-width);
   margin: auto;
-  padding: 0 var(--section-content-padding-x);
+  padding: var(--section-wrapper-padding-block) var(--section-content-padding-x);
+}
+
+main .section.light > div,
+main .section.highlight > div,
+main .section.navy > div {
+  padding-block: var(--section-wrapper-padding-block-compact);
+}
+
+main > .section > div > :first-child {
+  margin-block-start: 0;
+}
+
+main > .section > div > :last-child {
+  margin-block-end: 0;
 }
 
 main > .section:first-of-type {
@@ -490,8 +517,21 @@ main > .section:first-of-type {
 
 @media (width >= 900px) {
   main > .section > div {
-    padding: 0 var(--section-content-padding-x-lg);
+    padding-inline: var(--section-content-padding-x-lg);
   }
+}
+
+/* Blocks — vertical rhythm (cards use a wider band; hero is full-bleed) */
+main .section .block:not(.cards) {
+  margin-block: var(--block-margin-block);
+}
+
+main .section .cards {
+  margin-block: var(--card-block-margin-y);
+}
+
+main .section.hero-container .block {
+  margin-block: 0;
 }
 
 /* section metadata — set Style in section metadata (e.g. `navy`, `light`, `highlight`, `center`) */

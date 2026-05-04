@@ -278,6 +278,55 @@ header nav[aria-expanded='true'] .nav-sections {
   padding-bottom: var(--space-8);
 }
 
+/* Mobile nav list (default); desktop overrides in @media (width >= 900px) */
+header nav .nav-sections .default-content-wrapper > ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-3);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: var(--border-width-hairline) solid var(--header-nav-border);
+  background-color: var(--light-color);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > p {
+  padding: var(--space-3) var(--space-4);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > a:any-link {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--font-weight-semibold);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > ul {
+  display: none;
+  margin: 0;
+  padding: 0 var(--space-2) calc(var(--space-2) + var(--space-1));
+  border-top: var(--border-width-hairline) solid var(--header-nav-border);
+  background-color: var(--background-color);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
+  display: block;
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > ul > li a:any-link {
+  display: block;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--body-font-size-s);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > ul > li a:any-link:hover {
+  background-color: var(--header-nav-link-hover);
+  color: var(--link-color);
+}
+
 @media (width >= 900px) {
   header nav .nav-sections {
     display: block;
@@ -292,15 +341,20 @@ header nav[aria-expanded='true'] .nav-sections {
 
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-items: center;
     gap: var(--space-1) var(--space-2);
     margin: 0;
+    padding-top: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     position: relative;
     flex: 0 1 auto;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    overflow: visible;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > p {
@@ -410,57 +464,6 @@ header nav[aria-expanded='true'] .nav-sections {
 
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop[aria-expanded='true'] > p a:any-link {
     background-color: var(--header-nav-link-active);
-    color: var(--link-color);
-  }
-}
-
-/* Mobile nav list */
-@media (width < 900px) {
-  header nav .nav-sections .default-content-wrapper > ul {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    padding-top: var(--space-3);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: var(--border-width-hairline) solid var(--header-nav-border);
-    background-color: var(--light-color);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > p {
-    padding: var(--space-3) var(--space-4);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > a:any-link {
-    display: block;
-    padding: var(--space-3) var(--space-4);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
-    display: none;
-    margin: 0;
-    padding: 0 var(--space-2) calc(var(--space-2) + var(--space-1));
-    border-top: var(--border-width-hairline) solid var(--header-nav-border);
-    background-color: var(--background-color);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: block;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li a:any-link {
-    display: block;
-    padding: var(--space-3);
-    border-radius: var(--radius-sm);
-    font-size: var(--body-font-size-s);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li a:any-link:hover {
-    background-color: var(--header-nav-link-hover);
     color: var(--link-color);
   }
 }
